@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For Chinu ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Comic Sans MS', cursive;
+    background: url("ishu chinu.jpg") no-repeat center center fixed;
+    background-size: cover;
+    background-size: cover;
+    text-align: center;
+    color: white;
+}
+
+.container {
+    background: rgba(0,0,0,0.65);
+    padding: 40px;
+    margin: 100px auto;
+    width: 80%;
+    max-width: 750px;
+    border-radius: 25px;
+    animation: fadeIn 1s ease;
+}
+
+button {
+    padding: 12px 25px;
+    margin: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: pink;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: hotpink;
+    transform: scale(1.05);
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    animation: fadeIn 0.5s ease;
+}
+
+.popup img {
+    max-width: 300px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.popup p {
+    font-size: 20px;
+}
+
+input[type="number"] {
+    padding: 12px;
+    border-radius: 20px;
+    border: none;
+    width: 120px;
+    text-align: center;
+    font-size: 18px;
+    outline: none;
+    background: linear-gradient(45deg, pink, hotpink);
+    color: white;
+    box-shadow: 0 0 10px pink;
+}
+
+input[type="number"]::placeholder {
+    color: white;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="quizBox">
+    <h2 id="question"></h2>
+    <div id="options"></div>
+</div>
+
+<div class="popup" id="popupBox">
+    <img id="popupImage" src="">
+    <p id="popupText"></p>
+    <p style="font-size:14px; opacity:0.7;">(Press Enter or Space to continue)</p>
+</div>
+
+<script>
+
+let currentQuestion = 0;
+
+const questions = [
+
+{
+    text: "Hey Chinu I know ur mad my agarbatti but do you want to play a quiz with me?",
+    options: ["YES 😌", "NO 😤"],
+    action: function() {
+        showPopup("goof.jpg", "HEHE U STILL HAVE TO 😈 I AM NOT LEAVING U SO EARLY HEHE");
+    }
+},
+
+{
+    text: "I love you and I know we fight a lot and I also know you hate me but will you please unblock me my angel?",
+    options: ["NO I HATE YOU STILL", "YES BABY I LOVE YOU SO MUCH", "ISHANYA YOU STINK 🤢"],
+    action: function() {
+        showPopup("ISHU HUG CHINU.jpg", "I LOVE YOU BABY PLEASE FORGIVE ME YOU ARE SO CUTE 😭🙏");
+    }
+},
+
+{
+    text: "I love you Chinu... will you please be my girlfriend?",
+    options: ["YES ❤️", "NO 😭", "IDK 😶"],
+    action: function(choice) {
+        if(choice === 0){
+            showPopup("SMALLISHU.jpg", "Aww thank you 😭❤️");
+        } else {
+            showPopup("SMALLISHU.jpg", "WHY 😭😭😭😭");
+        }
+    }
+},
+
+{
+    text: "Do you want me to come there baby?",
+    options: ["YES ❤️", "NO 😢", "FUCK OFF 😭"],
+    action: function(choice) {
+        if(choice === 0){
+            showPopup("ISHUSMALL2.jpg", "IM COMING BABY 😌❤️");
+        } else {
+            showPopup("ISHUSMALL2.jpg", "😭😭😭😭😭😭😭 💔💔💔💔💔💔💔💔💔");
+        }
+    }
+},
+
+{
+    text: "If you still love me… rate my BOYFRIENDNESS out of 10 🥺",
+    options: [],
+    action: function() {}
+}
+
+];
+
+function loadQuestion() {
+
+    if(currentQuestion >= questions.length){
+        document.getElementById("quizBox").innerHTML = "<h2>Thank you for answering baby 😭❤️</h2>";
+        return;
+    }
+
+    const q = questions[currentQuestion];
+    document.getElementById("question").innerText = q.text;
+
+    const optionsDiv = document.getElementById("options");
+    optionsDiv.innerHTML = "";
+
+    if(currentQuestion === 4){
+        optionsDiv.innerHTML = `
+            <br>
+            <input type="number" id="rating" placeholder="0-10" min="0" max="10">
+            <br><br>
+            <button onclick="submitRating()">Submit 💕</button>
+        `;
+        return;
+    }
+
+    q.options.forEach((option, index) => {
+        const btn = document.createElement("button");
+        btn.innerText = option;
+        btn.onclick = () => q.action(index);
+        optionsDiv.appendChild(btn);
+    });
+}
+
+function submitRating(){
+    const value = document.getElementById("rating").value;
+    if(value === ""){
+        alert("Enter a number baby 😭");
+        return;
+    }
+    showPopup("SMALLISHU.jpg", "You rated me " + value + "/10 😭❤️ I will improve more for you.");
+}
+
+function showPopup(image, text){
+    document.getElementById("popupImage").src = image;
+    document.getElementById("popupText").innerText = text;
+    document.getElementById("popupBox").style.display = "flex";
+}
+
+document.addEventListener("keydown", function(e){
+    if(e.key === "Enter" || e.key === " "){
+        const popup = document.getElementById("popupBox");
+        if(popup.style.display === "flex"){
+            popup.style.display = "none";
+            currentQuestion++;
+            loadQuestion();
+        }
+    }
+});
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>
